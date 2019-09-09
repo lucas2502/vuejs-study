@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="Conhecendo o Cypress com Vuejs!"/>
+    <input class="hello-world" >
+    <button @click="hello">Clique aqui</button>
   </div>
 </template>
 
@@ -12,6 +14,11 @@ export default {
   name: 'app',
   components: {
     HelloWorld
+  },
+  methods: {
+    hello(){
+      alert('Tchau!')
+    }
   }
 }
 </script>

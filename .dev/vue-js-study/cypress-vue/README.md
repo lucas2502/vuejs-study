@@ -1,4 +1,4 @@
-# my-vueapp
+# cypress-vue
 
 ## Project setup
 ```
@@ -23,6 +23,11 @@ npm run test
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### Run your end-to-end tests
+```
+npm run test:e2e
 ```
 
 ### Customize configuration
