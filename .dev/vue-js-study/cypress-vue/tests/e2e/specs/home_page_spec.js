@@ -1,18 +1,32 @@
 describe('Managing todos', () => {
     it('Button click adds new todo', () =>{
-        cy.visit('/');
-        cy.get('#new-task').type('Hello');
-        cy.get('button').click();
-        cy.get('.todo').contains('Hello');
-    });
+        cy.visit('https://rsl-dev.vivoplataformadigital.com.br/cms/pt/family/microsoft-power-bi');
+        
+        cy.contains('Consulte-nos').click()
+        cy.contains('Solicite um contato').click()
+        
+        cy.get("#input-name")
+          .type('Lucas')
+          
+        cy.get("#input-lastname")
+          .type('França')
 
-    it('Clicking a todo crosses it out', () => {
-        cy.get('.todo').contains('Hello').click()
-        cy.get('.todo').contains('Hello').should('have.class', 'completed');
-    });
+        cy.get("#input-enterprise")
+          .type('Global Web')
 
-    it("Cross button deletes a todo", () => {
-        cy.get('.delete-todo').click();
-        cy.get('.todo').should('not.contain', 'Hello');
-    })
+        cy.get('[type="radio"]').first().check()  
+
+        cy.get("#input-cpf")
+          .type('00000000000')
+
+        cy.get("#input-city")
+          .type('Brasilía')
+        
+        cy.get('select')
+            .select(['Acre', 'Brasil']).invoke('val')
+            .should('deep.equal', ['Acre', 'Brasil'])
+
+        
+
+    });
 });
