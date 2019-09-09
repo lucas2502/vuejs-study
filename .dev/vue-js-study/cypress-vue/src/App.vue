@@ -1,35 +1,58 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Conhecendo o Cypress com Vuejs!"/>
-    <input class="hello-world" >
-    <button @click="hello">Clique aqui</button>
+    <h3>ToDo List</h3>
+    <input id="new-task" type="text" @keyup.enter="addTask" v-model="newTodo">
+    <button @click="addTask()">Add task</button>
+
+    <ul>
+      <li 
+        class="todo" 
+        @click="$event.target.classList.toggle('completed')"
+        :key="task"
+        v-for="(task, index) in tasks">
+          {{task}}
+          <button class="delete-todo" @click="removeTask(index)">x
+          </button>
+        </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      newTodo: '',
+      tasks: []
+    }
   },
   methods: {
-    hello(){
-      alert('Tchau!')
+    addTask(){
+      let task = document.querySelector('#new-task')
+      if(task.value.length > 0 && this.tasks.indexOf(task.value < 0)){
+        this.tasks.push(this.newTodo)
+        this.newTodo = ''
+      }
+    },
+    removeTask(value){
+      this.tasks.splice(value, 1)
     }
+
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#app{
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
+li.tasks{
+  cursor: pointer;
+  list-style-type: none;
+}
+.completed{
+  text-decoration: line-through;
+}
+
 </style>
