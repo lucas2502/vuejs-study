@@ -1,58 +1,115 @@
 <template>
   <div id="app">
-    <h3>ToDo List</h3>
-    <input id="new-task" type="text" @keyup.enter="addTask" v-model="newTodo">
-    <button @click="addTask()">Add task</button>
-
-    <ul>
-      <li 
-        class="todo" 
-        @click="$event.target.classList.toggle('completed')"
-        :key="task"
-        v-for="(task, index) in tasks">
-          {{task}}
-          <button class="delete-todo" @click="removeTask(index)">x
-          </button>
-        </li>
-    </ul>
+    <Product :premiu="premium"></Product>
+    <ReviewForm />
   </div>
 </template>
 
 <script>
-
+import Product from './components/Product'
+import ReviewForm from './components/ReviewForm'
 export default {
   name: 'app',
-  data() {
-    return {
-      newTodo: '',
-      tasks: []
-    }
+  components: {
+    Product,
+    ReviewForm
   },
-  methods: {
-    addTask(){
-      let task = document.querySelector('#new-task')
-      if(task.value.length > 0 && this.tasks.indexOf(task.value < 0)){
-        this.tasks.push(this.newTodo)
-        this.newTodo = ''
-      }
-    },
-    removeTask(value){
-      this.tasks.splice(value, 1)
-    }
-
+  data: {
+    premium: false,
+    cart: 0
   }
+  
 }
 </script>
 <style>
-#app{
-  text-align: center;
-}
-li.tasks{
-  cursor: pointer;
-  list-style-type: none;
-}
-.completed{
-  text-decoration: line-through;
-}
+body {
+    font-family: tahoma;
+    color:#282828;
+    margin: 0px;
+  }
+  
+  .nav-bar {
+    background: linear-gradient(-90deg, #84CF6A, #16C0B0);
+    height: 60px;
+    margin-bottom: 15px;
+  }
+
+  .product {
+    display: flex;
+    flex-flow: wrap;
+    padding: 1rem;
+  }
+
+  img {
+    border: 1px solid #d8d8d8;
+    width: 70%;
+    margin: 40px;
+    box-shadow: 0px .5px 1px #d8d8d8;
+  }
+  
+  .product-image {
+    width: 80%;
+  }
+  
+  .product-image,
+  .product-info {
+    margin-top: 10px;
+    width: 50%;
+  }
+  
+  .color-box {
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+  }
+  
+  .cart {
+    margin-right: 25px;
+    float: right;
+    border: 1px solid #d8d8d8;
+    padding: 5px 20px;
+  }
+  
+  button {
+    margin-top: 30px;
+    border: none;
+    background-color: #1E95EA;
+    color: white;
+    height: 40px;
+    width: 100px;
+    font-size: 14px;
+  } 
+  
+  .disabledButton {
+    background-color: #d8d8d8;
+  }
+  
+  .review-form {
+    width: 400px;
+    padding: 20px;
+    margin: 40px;
+    border: 1px solid #d8d8d8;
+  }
+  
+  input {
+    width: 100%;  
+    height: 25px;
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 60px;
+  }
+
+  .tab {
+    margin-left: 20px;
+    cursor: pointer;
+  }
+
+  .activeTab {
+    color: #16C0B0;
+    text-decoration: underline;
+  }
 
 </style>
